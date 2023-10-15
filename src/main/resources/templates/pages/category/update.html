@@ -1,0 +1,33 @@
+<div th:fragment="category_update_form" class="col-md-10">
+  <div class="card shadow">
+    <div class="card-header bg-success">
+      <h5 class="text-light">Update category </h5>
+    </div>
+    <div class="card-body p-4">
+      <th:block th:if="${category != null}">
+        <form th:action="@{/category/update/{categoryId} (categoryId=${category.id})}" method="post" id="add-form" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="name">Name</label>
+            <input type="text" name="name" class="form-control form-control-lg" placeholder="Enter Name" th:value="${category.name}" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="image" class="form-label">Select Image</label>
+            <input type="file" id="image" name="image" class="form-control form-control-lg" />
+          </div>
+          <div class="justify-content-center d-flex">
+            <img id="old-image-preview" th:src="${category.thumbnailUrl}" class="img-thumbnail mt-1" src="#" width="300" alt="Preview" style="max-width: 100%; display: block;">
+          </div>
+          <div class="justify-content-center d-flex">
+            <img id="image-preview" class="img-thumbnail mt-1" src="#" width="300" alt="Preview" style="max-width: 100%; display: none;">
+          </div>
+
+          <div class="mb-3 d-grid">
+            <input type="submit" value="Edit category" class="btn btn-success btn-lg" />
+          </div>
+        </form>
+      </th:block>
+      <th:block </div>
+    </div>
+    <script th:src="@{/static/js/custom/pages/category/update.js}"></script>
+  </div>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/header :: html_head">
+
+<body>
+  <div class="container no-margin no-padding full-width-screen">
+    <div th:replace="layout/tool_bar :: top_bar" />
+
+    <div class="row">
+      <div th:replace="layout/tool_bar :: side_bar" />
+      <div class="col justify-content-center d-flex">
+
+        <th:block th:switch="${employee_page_type}">
+
+          <th:block th:case="'index'">
+            <div th:with="employeeList=${employeeList}" th:replace="pages/employee/table :: employee-table">
+            </div>
+          </th:block>
+
+          <th:block th:case="'create'">
+            <div th:replace="pages/employee/create :: employee_create_form">
+            </div>
+          </th:block>
+
+          <th:block th:case="'update'">
+            <div th:replace="pages/employee/update :: employee_update_form">
+            </div>
+          </th:block>
+
+          <th:block th:case="*">Errror</th:block>
+        </th:block>
+      </div>
+    </div>
+
+  </div>
+  <div th:replace="layout/footer :: html_footer" />
+</body>
+
+</html>

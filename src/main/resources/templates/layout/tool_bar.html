@@ -1,0 +1,37 @@
+<div th:fragment="top_bar" class="d-flex justify-content-between align-items-center primary-color-background 
+      text-white vw-100 height-80">
+  <span class="px-3">Admin Page</span>
+  <img src="avatar.jpg" alt="Avatar" class="rounded-circle m-3" width="40" height="40">
+</div>
+
+<div class="row">
+  <div th:fragment="side_bar" class="col-md-3 full-height-screen" id="sidebar-col">
+    <div class="sidebar" id="side">
+      <ul class="nav flex-column text-center">
+        <li class="nav-item sidebar-item" th:classappend="${activeFlag == 'home'} ? 'sidebar-item-active' : ''" id="home-item">
+          <a class="nav-link link-item-color" href="/home">
+            <i class="fa-solid fa-house me-3"></i>Home
+          </a>
+        </li>
+        <li class="nav-item sidebar-item" th:classappend="${activeFlag == 'product'} ? 'sidebar-item-active' : ''" id=" product-item">
+          <a class="nav-link link-item-color" href="/product">
+            <i class="fa-solid fa-mug-hot me-3"></i>Product
+          </a>
+        </li>
+        <li class="nav-item sidebar-item" th:classappend="${activeFlag == 'category'} ? 'sidebar-item-active' : ''" id=" category-item">
+          <a class="nav-link link-item-color" href="/category">
+            <i class="fa-solid fa-list me-3"></i>Category
+          </a>
+        </li>
+        <li class="nav-item sidebar-item" th:classappend="${activeFlag == 'employee'} ? 'sidebar-item-active' : ''" id=" category-item">
+          <a class="nav-link link-item-color" href="/employee">
+            <i class="fa-solid fa-person me-3"></i>Employee
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-md-9">
+  </div>
+</div>

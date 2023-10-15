@@ -1,0 +1,79 @@
+<div th:fragment="product-edit-form" class="col-md-10">
+  <div class="card shadow">
+    <div class="card-header bg-success">
+      <h5 class="text-light">Edit product </h5>
+    </div>
+    <div class="card-body p-4">
+      <form th:action="@{/product/update/{productId} (productId=${product.id})}" th:object="${product}" method="post" enctype="multipart/form-data">
+
+        <div class="mb-3">
+          <label for="name">Name</label>
+          <input type="text" name="name" class="form-control form-control-lg" placeholder="Enter Name" th:value="${product.name}" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="name">Image:</label>
+          <div class="btn btn-primary" id="add-image-btn">
+            Add
+          </div>
+          <div class="row" id="imageList">
+          </div>
+
+
+        </div>
+
+        <div class="mb-3">
+          <div>Size:</div>
+          <div id="sizeList">
+            <th:block th:each="sizeItem, i : ${product.sizeList}">
+              <div>
+                <span>
+                  <input type="text" required th:name="sizeList[ + ${i.index} + ].size" class="form-control form-control-lg inline-auto-w" placeholder="Enter size" th:value="${sizeItem.size}">
+                  <input type=" number" required th:name="sizeList[ + ${i.index} + ].price" class="form-control form-control-lg inline-auto-w" placeholder="Price" th:value="${sizeItem.price}">
+                </span>
+              </div>
+            </th:block>
+          </div>
+          <div class=" btn btn-primary" id="add-size-btn" onclick="addSize()">
+            Add
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="description">Description:</label>
+          <textarea id="description" th:field="*{description}" class="form-control form-control-lg" required></textarea>
+        </div>
+
+        <div class="mb-3">
+          <div>Topping:</div>
+          <div id="toppingList">
+            <th:block th:each="toppingItem, i : ${product.toppingList}">
+              <div>
+                <span>
+                  <input type="text" required th:name="toppingList[ + ${i.index} + ].name" class="form-control form-control-lg inline-auto-w" placeholder="Enter name" th:value="${toppingItem.name}">
+                  <input type=" number" required th:name="toppingList[ + ${i.index} + ].price" class="form-control form-control-lg inline-auto-w" placeholder="Price" th:value="${toppingItem.price}">
+                </span>
+              </div>
+            </th:block>
+          </div>
+          <div class="btn btn-primary" id="add-topping-btn" onclick="addTopping()">
+            Add
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <select id="categoryId" name="categoryId" class="form-control form-control-lg" title="Category" required>
+            <option value="" class="form-control form-control-lg">Choose category</option>
+            <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}" th:selected="${#strings.toString(product.categoryId) == cat.id}"></option>
+          </select>
+        </div>
+
+        <div class="mb-3 d-grid">
+          <input type="submit" value="Create product" class="btn btn-success btn-lg" />
+        </div>
+
+      </form>
+    </div>
+  </div>
+  <script th:src="@{/static/js/custom/pages/product/update.js}"></script>
+</div>

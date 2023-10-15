@@ -1,0 +1,65 @@
+<div th:fragment="employee-table" class="col-md-10">
+  <a href="/employee/create" class="btn btn-primary">Add employee</a>
+  <div th:if="${employeeList != null || employeeList.size() > 0}">
+    <!-- Modal -->
+    <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <input type="hidden" id="delete-item-id">
+          <div class="modal-body">
+            Are you sure to delete this employee?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" onclick="" class="btn btn-primary">Agree</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class=" card">
+      <div class="card-body">
+        <h4 class="card-title text-center">Employees Table</h4>
+        </p>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Gender</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="employee : ${employeeList}" class="align-items-center">
+                <td th:text="${employee.id}"></td>
+                <td th:text="${employee.username}"></td>
+                <td th:text="${employee.firstName}"></td>
+                <td th:text="${employee.lastName}"></td>
+                <td th:text="${employee.gender == null or employee.gender == '' ? 'Empty' : employee.gender}"></td>
+
+
+                <td>
+                  <a th:href="@{employee/edit/{employeeId} (employeeId=${employee.id})}" class="text-success"><i class="fas fa-edit fa-lg mx-1"></i></a>
+
+                  <a type="button" id="delete-category" th:attr="onclick=|prepareDeleteItemId('${employee.id}')|" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="text-danger"><i class="fas fa-trash fa-lg mx-1"></i></a>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div th:unless="${employeeList != null || employeeList.size() > 0}">
+    <h1>employee list is empty</h1>
+  </div>
+  <script th:src="@{/static/js/custom/pages/employee/table.js}"></script>
+</div>

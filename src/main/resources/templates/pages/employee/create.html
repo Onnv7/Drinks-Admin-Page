@@ -1,0 +1,57 @@
+<div th:fragment="employee_create_form" class="col-md-10">
+  <link th:href="@{/static/css/custom/upload-card.css}" rel="stylesheet" type="text/css" />
+  <div class="card shadow">
+    <div class="card-header bg-success">
+      <h5 class="text-light">Create new employee</h5>
+    </div>
+    <div class="card-body p-4">
+
+      <form th:action="@{/employee/create}" th:object="${employee}" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="firstName">First name:</label>
+          <input type="text" id="firstName" th:field="*{firstName}" class="form-control form-control-lg" placeholder="Enter first name" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="lastName">Last name:</label>
+          <input type="text" id="lastName" th:field="*{lastName}" class="form-control form-control-lg" placeholder="Enter last name" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="username">Username:</label>
+          <input type="text" id="username" th:field="*{username}" class="form-control form-control-lg" placeholder="Enter username" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="password">Password:</label>
+          <input type="password" id="password" th:field="*{password}" class="form-control form-control-lg" placeholder="Enter password" required>
+        </div>
+        <div class="mb-3">
+          <label for="re-password">Re-Password:</label>
+          <input type="password" id="re-password" class="form-control form-control-lg" placeholder="Enter re-password" required>
+        </div>
+        <div class="mb-3">
+          <label for="birthDate">Birth date:</label>
+          <div class="input-group date">
+            <input type="date" class="form-control" id="birthDate" th:field="*{birthDate}" />
+            <div class="input-group-addon">
+              <span class="glyphicon glyphicon-th"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <select id="gender" name="gender" class="form-control form-control-lg" title="Employee gender" required>
+            <option value="" class="form-control form-control-lg">Choose gender</option>
+            <option value="FEMALE" class="form-control form-control-lg">Female</option>
+            <option value="MALE" class="form-control form-control-lg">Male</option>
+          </select>
+        </div>
+        <div class="mb-3 d-grid">
+          <input type="submit" value="Create employee" class="btn btn-success btn-lg" onclick="validatePassword()" />
+        </div>
+      </form>
+    </div>
+  </div>
+  <script th:src="@{/static/js/custom/pages/employee/create.js}"></script>
+</div>

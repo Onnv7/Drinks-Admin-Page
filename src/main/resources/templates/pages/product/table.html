@@ -1,0 +1,65 @@
+<div th:fragment="product-table" class="col-md-10">
+  <a href="/product/create" class="btn btn-primary">Add category</a>
+  <div th:if="${productList != null || productList.size() > 0}">
+    <!-- Modal -->
+    <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <input type="hidden" id="delete-item-id">
+          <div class="modal-body">
+            Are you sure to delete this product?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" onclick="deleteProduct()" class="btn btn-primary">Agree</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class=" card">
+      <div class="card-body">
+        <h4 class="card-title text-center">Products Table</h4>
+        </p>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="product : ${productList}" class="align-items-center">
+                <td th:text="${product.id}"></td>
+                <td><img th:src="${product.imageUrl}" width="50" class="img-thumbnail"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.price}"></td>
+                <td th:text="${product.description}"></td>
+                <td>
+                  <a th:href="@{product/edit/{productId} (productId=${product.id})}" class="text-success"><i class="fas fa-edit fa-lg mx-1"></i></a>
+
+
+                  <a type="button" id="delete-category" th:attr="onclick=|prepareDeleteItemId('${product.id}')|" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="text-danger"><i class="fas fa-trash fa-lg mx-1"></i></a>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div th:unless="${productList != null || productList.size() > 0}">
+    <h1>Product list is empty</h1>
+  </div>
+  <script th:src="@{/static/js/custom/pages/product/table.js}"></script>
+</div>

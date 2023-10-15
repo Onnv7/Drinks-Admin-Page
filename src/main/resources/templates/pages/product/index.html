@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/header :: html_head">
+
+<body>
+  <div class="container no-margin no-padding full-width-screen">
+    <div th:replace="layout/tool_bar :: top_bar" />
+    <div class="row same-height">
+      <div th:replace="layout/tool_bar :: side_bar" />
+      <div class="col justify-content-center d-flex">
+
+        <th:block th:switch="${product_page_type}">
+
+          <th:block th:case="'index'">
+            <div th:with="productList=${productList}" th:replace="pages/product/table :: product-table">
+            </div>
+          </th:block>
+
+          <th:block th:case="'create'">
+            <div th:replace="pages/product/create :: product-create-form">
+            </div>
+          </th:block>
+
+          <th:block th:case="'update'">
+            <div th:replace="pages/product/update :: product-edit-form">
+            </div>
+          </th:block>
+
+          <th:block th:case="*">Errror</th:block>
+
+        </th:block>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div th:replace="layout/footer :: html_footer" />
+</body>
+
+
+</html>

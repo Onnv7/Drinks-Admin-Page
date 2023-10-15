@@ -1,0 +1,58 @@
+<div th:fragment="product-create-form" class="col-md-10">
+  <link th:href="@{/static/css/custom/upload-card.css}" rel="stylesheet" type="text/css" />
+  <div class="card shadow">
+    <div class="card-header bg-success">
+      <h5 class="text-light">Create new product</h5>
+    </div>
+    <div class="card-body p-4">
+
+      <form th:action="@{/product/create}" th:object="${createProductRequest}" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="name">Name:</label>
+          <input type="text" id="name" th:field="*{name}" class="form-control form-control-lg" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="name">Image:</label>
+          <div class="btn btn-primary" id="add-image-btn">
+            Add
+          </div>
+          <div class="row" id="imageList">
+          </div>
+
+
+        </div>
+        <div class="mb-3">
+          <div>Size:</div>
+          <div id="sizeList"></div>
+          <div class="btn btn-primary" id="add-size-btn" onclick="addSize()">
+            Add
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="description">Description:</label>
+          <textarea id="description" th:field="*{description}" class="form-control form-control-lg" required></textarea>
+        </div>
+
+        <div class="mb-3">
+          <div>Topping:</div>
+          <div id="toppingList"></div>
+          <div class="btn btn-primary" id="add-topping-btn" onclick="addTopping()">
+            Add
+          </div>
+        </div>
+        <div class="mb-3">
+          <select th:field="*{categoryId}" class="form-control form-control-lg" required>
+            <option value="" class="form-control form-control-lg">Choose category</option>
+            <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
+          </select>
+        </div>
+        <div class="mb-3 d-grid">
+          <input type="submit" value="Create product" class="btn btn-success btn-lg" />
+        </div>
+      </form>
+    </div>
+  </div>
+  <script th:src="@{/static/js/custom/pages/product/create.js}"></script>
+</div>

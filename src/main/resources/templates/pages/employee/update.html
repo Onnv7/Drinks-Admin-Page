@@ -1,0 +1,60 @@
+<div th:fragment="employee_update_form" class="col-md-10">
+  <div class="card shadow">
+    <div class="card-header bg-success">
+      <h5 class="text-light">Update employee </h5>
+    </div>
+    <div class="card-body p-4">
+      <th:block th:if="${employee != null}">
+        <form th:action="@{/employee/update/{employeeId} (employeeId=${employee.id})}" method="post" th:object="${employee}" id="add-form" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="firstName">First name:</label>
+            <input type="text" id="firstName" th:field="*{firstName}" class="form-control form-control-lg" placeholder="Enter first name" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="lastName">Last name:</label>
+            <input type="text" id="lastName" th:field="*{lastName}" class="form-control form-control-lg" placeholder="Enter last name" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="username">Username:</label>
+            <input type="text" id="username" th:field="*{username}" class="form-control form-control-lg" placeholder="Enter username" disabled>
+          </div>
+
+          <div class="mb-3">
+            <label for="birthDate">Birth date:</label>
+            <div class="input-group date">
+              <input type="date" class="form-control" id="birthDate" th:field="*{birthDate}" th:value="${#dates.format(birthDate, 'yyyy-MM-dd')}" />
+
+
+              <div class="input-group-addon">
+                <span class="glyphicon glyphicon-th"></span>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <select id="gender" name="gender" class="form-control form-control-lg" title="Employee gender" required>
+              <option value="" class="form-control form-control-lg">Choose gender</option>
+              <option value="FEMALE" class="form-control form-control-lg" th:selected="${#strings.toString(employee.gender) == 'FEMALE'}">Female</option>
+              <option value="MALE" class="form-control form-control-lg" th:selected="${#strings.toString(employee.gender) == 'MALE'}">Male</option>
+            </select>
+          </div>
+
+        <div class="mb-3">
+            <div class="row ">
+                <label class="form-check-label d-inline width-auto" for="enabled">Active status:</label>
+                <div class="form-check form-switch d-inline width-auto">
+                    <input class="form-check-input switch-size " type="checkbox" role="switch" id="enabled" th:field="*{enabled}">
+                </div>
+            </div>
+        </div>
+
+          <div class="mb-3 d-grid">
+            <input type="submit" value="Edit employee" class="btn btn-success btn-lg" />
+          </div>
+        </form>
+      </th:block>
+      <th:block </div>
+    </div>
+    <script th:src="@{/static/js/custom/pages/employee/update.js}"></script>
+  </div>
